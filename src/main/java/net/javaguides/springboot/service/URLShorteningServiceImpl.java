@@ -16,22 +16,16 @@ public class URLShorteningServiceImpl implements URLShorteningService {
 
     @Override
     public URL shortenURL(User user, String originalURL) {
-        // Generate a unique identifier for the shortened URL
-        String uniqueID = UUID.randomUUID().toString().substring(0, 6); // Example: Generate a 6-character unique ID
-
-        // Construct the shortened URL
-        String shortenedURL = "http://your-domain.com/" + uniqueID; // Replace "your-domain.com" with your actual domain
-
-        // Create a new UserURL object
+        System.out.println("Hello Buddy");
+        String uniqueID = UUID.randomUUID().toString().substring(0, 6);
+        String shortenedURL = "http://your-domain.com/" + uniqueID;
         URL url = new URL();
         url.setUser(user);
         url.setOriginalURL(originalURL);
         url.setShortenedURL(shortenedURL);
 
-        // Save the URL in the database
         URL savedUrl = userURLRepository.save(url);
 
-        // Return the saved URL
         return savedUrl;
     }
 
@@ -40,5 +34,4 @@ public class URLShorteningServiceImpl implements URLShorteningService {
         return userURLRepository.findByUser(user);
     }
 
-    // Other methods as needed
 }
