@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <!-- Head content -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+<!-- Navigation bar -->
+<!-- create navigation bar ( header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}"><span sec:authentication="principal.username"> User</span></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dashboard}">Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<br>
+<br>
+<div class="container">
+    <h1>Dashboard</h1>
+
+    <!-- URL Shortening Form -->
+    <form action="/dashboard/shorten" method="post">
+        <input type="text" name="originalURL" placeholder="Enter URL to shorten">
+        <button type="submit">Shorten</button>
+    </form>
+
+    <!-- List of Shortened URLs -->
+    <h2>Your Shortened URLs</h2>
+    <ul>
+        <th:block th:each="URL : ${userURLs}">
+            <li>
+                <a th:href="${URL.shortenedURL}" th:text="${URL.originalURL}"></a>
+                Click Count: <span th:text="${URL.clickCount}"></span>
+            </li>
+        </th:block>
+    </ul>
+</div>
+
+<!-- Additional scripts -->
+</body>
+</html>
