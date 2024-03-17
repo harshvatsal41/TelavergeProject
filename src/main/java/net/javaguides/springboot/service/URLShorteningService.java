@@ -8,4 +8,8 @@ import java.util.List;
 public interface URLShorteningService {
     public URL shortenURL(User user, String originalURL);
     public List<URL> getUserURLs(User user);
+
+    public String updateCount(Long id);
+    public String deleteContact(Long id);
+
 }
