@@ -1,8 +1,9 @@
 package net.javaguides.springboot.model;
 
 
-import javax.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user_url")
@@ -69,6 +70,17 @@ public class URL {
 
     public void setClickCount(int clickCount) {
         this.clickCount = clickCount;
+    }
+
+    @Override
+    public String toString() {
+        return "URL{" +
+                "id=" + id +
+                ", user=" + user +
+                ", originalURL='" + originalURL + '\'' +
+                ", shortenedURL='" + shortenedURL + '\'' +
+                ", clickCount=" + clickCount +
+                '}';
     }
 
     // Getters and setters

@@ -11,5 +11,6 @@ public interface URLShorteningService {
 
     public String updateCount(Long id);
     public String deleteContact(Long id);
+    public URL getOriginalUrl(String shortenedUrl);
 
 }

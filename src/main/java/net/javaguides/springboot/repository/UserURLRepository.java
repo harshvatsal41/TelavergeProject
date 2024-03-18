@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface UserURLRepository extends JpaRepository<URL , Long> {
     List<URL> findByUser(User user);
+    URL findByShortenedURL(String shortenedUrl);
 }

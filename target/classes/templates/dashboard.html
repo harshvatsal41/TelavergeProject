@@ -89,9 +89,8 @@
             </thead>
             <tbody>
                 <tr th:each="url : ${userURLs}">
-
                     <td>
-                        <a th:href="${url.originalURL}" th:text="${url.shortenedURL}"  th:onclick="|incrementCount(${url.id})|"  >Pullll</a>
+                        <a th:href="'/dashboard/r/'+${url.shortenedURL}" th:text="'http://localhost:9191/'+${url.shortenedURL}"  th:onclick="|incrementCount(${url.id})|"  >Pullll</a>
                     </td>
                     <td><a th:href="${url.originalURL}" th:text="${url.originalURL}"></a></td>
                     <td><span th:text="${url.clickCount}"></span></td>

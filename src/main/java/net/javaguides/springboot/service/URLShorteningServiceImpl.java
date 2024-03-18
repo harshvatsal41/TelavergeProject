@@ -19,7 +19,7 @@ public class URLShorteningServiceImpl implements URLShorteningService {
     @Override
     public URL shortenURL(User user, String originalURL) {
         String uniqueID = UUID.randomUUID().toString().substring(0, 6);
-        String shortenedURL = "http://localhost:9191/" + uniqueID;
+        String shortenedURL = uniqueID;
         URL url = new URL();
         url.setUser(user);
         url.setOriginalURL(originalURL);
@@ -44,6 +44,12 @@ public class URLShorteningServiceImpl implements URLShorteningService {
         url.setClickCount(url.getClickCount()+1);
         this.userURLRepository.save(url);
         return url.getOriginalURL();
+    }
+
+    public URL getOriginalUrl(String shortenedUrl) {
+        URL url = userURLRepository.findByShortenedURL(shortenedUrl);
+//        System.out.println(url.toString());
+        return url != null ? url : null;
     }
 
 

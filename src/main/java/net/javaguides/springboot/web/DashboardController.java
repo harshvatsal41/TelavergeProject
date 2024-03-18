@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +62,15 @@ public class DashboardController {
         System.out.println(uId);
         String a = urlShorteningService.updateCount(uId);
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/r/{uUrl}")
+    public void reDirect(HttpServletResponse response, @PathVariable("uUrl")String uUrl , Model model) throws IOException {
+        URL url = urlShorteningService.getOriginalUrl(uUrl);
+        System.out.println(url.getId());
+        String a = urlShorteningService.updateCount(url.getId());
+        response.sendRedirect(url.getOriginalURL());
+//        return "redirect:/dashboard";
     }
 
     @GetMapping("/userdelete/{uid}")
